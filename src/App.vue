@@ -2,19 +2,19 @@
   <v-app>
 
     <v-main>
-      <HelloWorld/>
+      <SectionComponents/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import SectionComponents from './components/SectionComponents';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    SectionComponents,
   },
 
   data: () => ({
