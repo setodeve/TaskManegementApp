@@ -52,6 +52,7 @@
             outlined
             elevation="1"
             >
+            <TaskComponents/>
             <v-list-item-title class="text-h5 mb-1">
               Headline 5
             </v-list-item-title>
@@ -59,16 +60,23 @@
             </v-card>
             <a @click="deleteTodo(index)" class="btn btn-primary mt-2">×</a>
           </v-list-item-content>
-
+        <TaskNewComponents/>
         </v-list-item>
       </v-card>
+
     </div>
   </div>
 </template>
 
 <script>
+
+import TaskComponents from './TaskComponents';
+import TaskNewComponents from './TaskNewComponents';
   export default {
     name: 'SectionComponents',
+    components: {
+      TaskComponents,TaskNewComponents
+    },
     data() {
       return{
         inputSection:'',
