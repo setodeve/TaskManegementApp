@@ -40,25 +40,40 @@
             class="mb-2"
             elevation="1"
             >
-            <div v-if="section.editFlg" @dblclick="changeFlg(index)">
-              {{ section.title }}              
-            </div>
-            <div v-else>
-              <v-text-field v-model="editing" @keyup.enter="saveSection(index)" :value="section.title" ></v-text-field>
-            </div>
+              <div v-if="section.editFlg" @dblclick="changeFlg(index)">
+                {{ section.title }}              
+              </div>
+              <div v-else>
+                <v-text-field v-model="editing" @keyup.enter="saveSection(index)" :value="section.title" ></v-text-field>
+              </div>
+              </v-card>
+              <v-card
+              max-width="150"
+              outlined
+              class="mb-2"
+              elevation="1"
+              v-for="(task, index) in section.tasks" :key="index" 
+              >
+              <TaskComponents/>
 
+              <v-card
+                outlined
+                class="mb-2"
+                elevation="1"
+              >
+                <v-list-item-title class="text-h5 mb-1">
+                  {{ task }}
+                </v-list-item-title>
+              </v-card>
+              <v-card
+                outlined
+                class="mb-2"
+                elevation="1"
+              >
+                <v-card-subtitle>Section Name : {{ section.title }}</v-card-subtitle>
+                <a @click="deleteTodo(index)" class="btn btn-primary mt-2">×</a>
+              </v-card>
             </v-card>
-            <v-card
-            outlined
-            elevation="1"
-            >
-            <TaskComponents/>
-            <v-list-item-title class="text-h5 mb-1">
-              Headline 5
-            </v-list-item-title>
-            <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
-            </v-card>
-            <a @click="deleteTodo(index)" class="btn btn-primary mt-2">×</a>
           </v-list-item-content>
         <TaskNewComponents/>
         </v-list-item>
@@ -87,7 +102,7 @@ import TaskNewComponents from './TaskNewComponents';
     methods:{
       createTodo(){
         if(this.inputSection=="") return ;
-        this.Sections.push({title: this.inputSection, editFlg:true});
+        this.Sections.push({title: this.inputSection, editFlg:true,tasks:[""]});
         this.inputSection = '' ;
       },
       changeFlg(i){
