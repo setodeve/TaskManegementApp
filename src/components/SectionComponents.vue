@@ -3,15 +3,6 @@
     <v-row>
       <v-col
         cols="12"
-        sm="3"
-        md="3"
-        dense
-        class="ma-1"
-      >
-        <v-text-field filled v-model="inputSection" type="text"></v-text-field>
-      </v-col>
-      <v-col
-        cols="12"
         sm="2"
         md="3"
       >
@@ -54,7 +45,7 @@
           </v-list-item-content>
 
         </v-list-item>
-        <TaskNewComponents :Sections="Sections" :parent_index="parent_index" @AddTodo="AddTodo"/>
+        <TaskNewComponents :parent_index="parent_index" @AddTodo="AddTodo"/>
       </v-card>
     </div>
     </v-row>
@@ -72,15 +63,14 @@ import TaskNewComponents from './TaskNewComponents';
     },
     data() {
       return{
-        inputSection:'',
         Sections :[],
         editing:''
       };
     },
     methods:{
       createTodo(){
-        if(this.inputSection=="") return ;
-        this.Sections.push({title: this.inputSection, 
+        
+        this.Sections.push({title: "Section Title", 
                             editFlg:true,
                             tasks:[{
                                 editTFlg:true,
@@ -90,7 +80,6 @@ import TaskNewComponents from './TaskNewComponents';
                               }]
                             });
 
-        this.inputSection = '' ;
       },
       changeSectionFlg(i,flg){
         if(flg=="start"){

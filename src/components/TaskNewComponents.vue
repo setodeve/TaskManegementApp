@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    props: ["Sections", "parent_index"],
+    props: ["parent_index"],
     name: 'TaskNewComponents',
     data() {
       return{
