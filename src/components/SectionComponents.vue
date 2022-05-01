@@ -47,39 +47,8 @@
                 <v-text-field v-model="editing" @keyup.enter="changeSectionFlg(parent_index,'end')" :value="section.title" ></v-text-field>
               </div>
               </v-card>
-              <v-card
-              max-width="150"
-              outlined
-              class="mb-2"
-              elevation="1"
-              v-for="(task, index) in section.tasks" :key="index" 
-              >
-              <TaskComponents/>
 
-              <v-card
-                outlined
-                class="mb-2"
-                elevation="1"
-              >
-
-                <div v-if="task.editTFlg" @dblclick="changeTaskTitleFlg(parent_index,index,'start')">
-                  <v-list-item-title class="text-h5 mb-1">
-                    {{ task.title }}
-                  </v-list-item-title>
-                </div>
-                <div v-else>
-                  <v-text-field v-model="editing" @keyup.enter="changeTaskTitleFlg(parent_index,index,'end')" :value="task.title" ></v-text-field>
-                </div>
-              </v-card>
-              <v-card-subtitle>Section Name : {{ section.title }}</v-card-subtitle>
-              <div v-if="task.editCFlg" @dblclick="changeTaskContentsFlg(parent_index,index,'start')">
-                <v-card-text>{{ task.contents }}</v-card-text>
-              </div>
-              <div v-else>
-                <v-text-field v-model="editing" @keyup.enter="changeTaskContentsFlg(parent_index,index,'end')" :value="task.contents" ></v-text-field>
-              </div>
-                <a @click="deleteTodo(index)" class="btn btn-primary mt-2">×</a>
-            </v-card>
+              <TaskComponents :section='section' :parent_index="parent_index" />
           </v-list-item-content>
         <TaskNewComponents/>
         </v-list-item>
@@ -102,14 +71,12 @@ import TaskNewComponents from './TaskNewComponents';
       return{
         inputSection:'',
         Sections :[],
-        editing:'',
-        for_section: 1
+        editing:''
       };
     },
     methods:{
       createTodo(){
         if(this.inputSection=="") return ;
-        this.for_section += 1 ;
         this.Sections.push({title: this.inputSection, 
                             editFlg:true,
                             tasks:[{
@@ -131,24 +98,7 @@ import TaskNewComponents from './TaskNewComponents';
           this.Sections[i].title = this.editing ;
         }
       },
-      changeTaskContentsFlg(parent_i,i,flg){
-        if(flg=="start"){
-          this.Sections[parent_i].tasks[i].editCFlg = false ;
-          this.editing = this.Sections[parent_i].tasks[i].contents ;
-        }else{
-          this.Sections[parent_i].tasks[i].editCFlg = true ;
-          this.Sections[parent_i].tasks[i].contents = this.editing ;
-        }
-      },
-      changeTaskTitleFlg(parent_i,i,flg){
-        if(flg=="start"){
-          this.Sections[parent_i].tasks[i].editTFlg = false ;
-          this.editing = this.Sections[parent_i].tasks[i].title ;
-        }else{
-          this.Sections[parent_i].tasks[i].editTFlg = true ;
-          this.Sections[parent_i].tasks[i].title = this.editing ;
-        }
-      },
+
     },
   }
 </script>
