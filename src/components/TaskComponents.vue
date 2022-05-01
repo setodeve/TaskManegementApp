@@ -30,12 +30,14 @@
     </div>
       <a @click="deleteTodo(section,index)" class="btn btn-primary mt-2">×</a>
   </v-card>
+
   </div>
 </template>
 
 <script>
+
   export default {
-    props: ["section", "parent_index"],
+    props: ["section"],
     emit:["changeTaskTitleFlg","changeTaskContentsFlg","deleteTodo"],
     name: 'TaskComponents',
     data() {
@@ -64,7 +66,8 @@
       },
       deleteTodo(section,i){
         section.tasks.splice(i,1) ;
-      }
+      },
+
     },
   }
 </script>

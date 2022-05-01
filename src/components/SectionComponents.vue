@@ -50,10 +50,11 @@
 
               <TaskComponents :section='section' :parent_index="parent_index" />
           </v-list-item-content>
-        <TaskNewComponents/>
-        </v-list-item>
-      </v-card>
 
+        </v-list-item>
+      <a @click="AddTodo(parent_index)" class="btn btn-primary mt-2">＋</a>
+      </v-card>
+    <TaskNewComponents :section="section" :index="index"/>
     </div>
   </div>
 </template>
@@ -98,7 +99,13 @@ import TaskNewComponents from './TaskNewComponents';
           this.Sections[i].title = this.editing ;
         }
       },
-
+      AddTodo(i){
+        this.Sections[i].tasks.push({editTFlg:true,
+                                    title:"title",
+                                    editCFlg:true,
+                                contents:"content"
+                              });
+      },
     },
   }
 </script>
