@@ -27,7 +27,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <div v-for="(section, index) in Sections" :key="index">
+    <div v-for="(section, parent_index) in Sections" :key="parent_index">
       <v-card
         max-width="200"
         outlined
@@ -40,11 +40,11 @@
             class="mb-2"
             elevation="1"
             >
-              <div v-if="section.editFlg" @dblclick="changeFlg(index)">
+              <div v-if="section.editFlg" @dblclick="changeSectionFlg(parent_index,'start')">
                 {{ section.title }}              
               </div>
               <div v-else>
-                <v-text-field v-model="editing" @keyup.enter="saveSection(index)" :value="section.title" ></v-text-field>
+                <v-text-field v-model="editing" @keyup.enter="changeSectionFlg(parent_index,'end')" :value="section.title" ></v-text-field>
               </div>
               </v-card>
               <v-card
@@ -61,18 +61,24 @@
                 class="mb-2"
                 elevation="1"
               >
-                <v-list-item-title class="text-h5 mb-1">
-                  {{ task }}
-                </v-list-item-title>
+
+                <div v-if="task.editTFlg" @dblclick="changeTaskTitleFlg(parent_index,index,'start')">
+                  <v-list-item-title class="text-h5 mb-1">
+                    {{ task.title }}
+                  </v-list-item-title>
+                </div>
+                <div v-else>
+                  <v-text-field v-model="editing" @keyup.enter="changeTaskTitleFlg(parent_index,index,'end')" :value="task.title" ></v-text-field>
+                </div>
               </v-card>
-              <v-card
-                outlined
-                class="mb-2"
-                elevation="1"
-              >
-                <v-card-subtitle>Section Name : {{ section.title }}</v-card-subtitle>
+              <v-card-subtitle>Section Name : {{ section.title }}</v-card-subtitle>
+              <div v-if="task.editCFlg" @dblclick="changeTaskContentsFlg(parent_index,index,'start')">
+                <v-card-text>{{ task.contents }}</v-card-text>
+              </div>
+              <div v-else>
+                <v-text-field v-model="editing" @keyup.enter="changeTaskContentsFlg(parent_index,index,'end')" :value="task.contents" ></v-text-field>
+              </div>
                 <a @click="deleteTodo(index)" class="btn btn-primary mt-2">×</a>
-              </v-card>
             </v-card>
           </v-list-item-content>
         <TaskNewComponents/>
@@ -96,23 +102,53 @@ import TaskNewComponents from './TaskNewComponents';
       return{
         inputSection:'',
         Sections :[],
-        editing:''
+        editing:'',
+        for_section: 1
       };
     },
     methods:{
       createTodo(){
         if(this.inputSection=="") return ;
-        this.Sections.push({title: this.inputSection, editFlg:true,tasks:[""]});
+        this.for_section += 1 ;
+        this.Sections.push({title: this.inputSection, 
+                            editFlg:true,
+                            tasks:[{
+                                editTFlg:true,
+                                title:"title",
+                                editCFlg:true,
+                                contents:"content"
+                              }]
+                            });
+
         this.inputSection = '' ;
       },
-      changeFlg(i){
-        this.Sections[i].editFlg = false ;
-        this.editing = this.Sections[i].title ;
+      changeSectionFlg(i,flg){
+        if(flg=="start"){
+          this.Sections[i].editFlg = false ;
+          this.editing = this.Sections[i].title ;
+        }else{
+          this.Sections[i].editFlg = true ;
+          this.Sections[i].title = this.editing ;
+        }
       },
-      saveSection(i){
-        this.Sections[i].editFlg = true ;
-        this.Sections[i].title = this.editing ;
-      }
+      changeTaskContentsFlg(parent_i,i,flg){
+        if(flg=="start"){
+          this.Sections[parent_i].tasks[i].editCFlg = false ;
+          this.editing = this.Sections[parent_i].tasks[i].contents ;
+        }else{
+          this.Sections[parent_i].tasks[i].editCFlg = true ;
+          this.Sections[parent_i].tasks[i].contents = this.editing ;
+        }
+      },
+      changeTaskTitleFlg(parent_i,i,flg){
+        if(flg=="start"){
+          this.Sections[parent_i].tasks[i].editTFlg = false ;
+          this.editing = this.Sections[parent_i].tasks[i].title ;
+        }else{
+          this.Sections[parent_i].tasks[i].editTFlg = true ;
+          this.Sections[parent_i].tasks[i].title = this.editing ;
+        }
+      },
     },
   }
 </script>
