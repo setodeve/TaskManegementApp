@@ -28,7 +28,7 @@
     <div v-else>
       <v-text-field v-model="editing" @keyup.enter="changeTaskContentsFlg(section,index,'end')" :value="task.contents" ></v-text-field>
     </div>
-      <a @click="deleteTodo(section,index)" class="btn btn-primary mt-2">×</a>
+      <a @click="deleteTodo(section,index)" class="btn btn-primary mt-2">×<font-awesome-icon :icon="['fas', 'play']" /></a>
   </v-card>
 
   </div>
