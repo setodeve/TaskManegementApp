@@ -28,9 +28,24 @@
     <div v-else>
       <v-text-field v-model="editing" @keyup.enter="changeTaskContentsFlg(section,index,'end')" :value="task.contents" ></v-text-field>
     </div>
-    <div class="text-right">
-      <a @click="changeTaskContentsFlg(section,index,'start')" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'pen']" /></a>
-      <a @click="deleteTodo(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'trash']" /></a>
+    <div class="d-flex align-start">
+      <a @click="changeTaskContentsFlg(section,index,'start')" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'pen']" :style="{ color: 'grey' }" /></a>
+
+      <div v-if="task.complete">
+        <a @click="checkcomplete(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'check']" :style="{ color: 'green' }" /></a>
+      </div>
+      <div v-else>
+        <a @click="checkcomplete(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'check']" :style="{ color: 'grey' }" /></a>
+      </div> 
+
+      <div v-if="task.favo">
+        <a @click="checkstatus(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'star']" :style="{ color: 'yellow' }"/></a>
+      </div>
+      <div v-else>
+        <a @click="checkstatus(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'star']" :style="{ color: 'grey' }"/></a>
+      </div>
+      <a @click="deleteTodo(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'trash']" :style="{ color: 'grey' }" /></a>
+
     </div>
   </v-card>
 
@@ -41,7 +56,7 @@
 
   export default {
     props: ["section"],
-    emit:["changeTaskTitleFlg","changeTaskContentsFlg","deleteTodo"],
+    emit:["changeTaskTitleFlg","changeTaskContentsFlg","deleteTodo","checkstatus"],
     name: 'TaskComponents',
     data() {
       return{
@@ -70,7 +85,14 @@
       deleteTodo(section,i){
         section.tasks.splice(i,1) ;
       },
-
+      checkstatus(section,i){
+        if(section.tasks[i].favo) section.tasks[i].favo = false ;
+        else section.tasks[i].favo = true ;
+      },
+      checkcomplete(section,i){
+        if(section.tasks[i].complete) section.tasks[i].complete = false ;
+        else section.tasks[i].complete = true ;
+      },
     },
   }
 </script>

@@ -11,7 +11,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
-library.add(faUserSecret,faTrash,faPlus,faPen)
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUserSecret,faTrash,faPlus,faPen,faStar,faCheck)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

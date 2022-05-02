@@ -76,6 +76,8 @@ import draggable from 'vuedraggable'
         this.Sections.push({title: "Section Title", 
                             editFlg:true,
                             tasks:[{
+                                favo:false,
+                                complete:false,
                                 editTFlg:true,
                                 title:"title",
                                 editCFlg:true,
@@ -94,10 +96,13 @@ import draggable from 'vuedraggable'
         }
       },
       AddTodo(i){
-        this.Sections[i].tasks.push({editTFlg:true,
+        this.Sections[i].tasks.push({
+                                    favo:false,
+                                    complete:false,
+                                    editTFlg:true,
                                     title:"title",
                                     editCFlg:true,
-                                contents:"content"
+                                    contents:"content"
                               });
       },
     },
