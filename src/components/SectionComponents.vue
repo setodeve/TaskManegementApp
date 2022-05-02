@@ -18,37 +18,39 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-row>
-      <div v-for="(section, parent_index) in Sections" :key="parent_index">
-      <v-card
-        max-width="200"
-        outlined
-        class="pa-3 ma-2"
-        elevation="2"
-      >
-        <v-list-item three-line>
-          <v-list-item-content>
-            <v-card
+    <v-container>
+      <draggable  class="d-flex align-start">
+        <div v-for="(section, parent_index) in Sections" :key="parent_index">
+          <v-card
+            max-width="200"
             outlined
-            class="mb-2"
-            elevation="1"
-            >
-              <div v-if="section.editFlg" @dblclick="changeSectionFlg(parent_index,'start')">
-                {{ section.title }}              
-              </div>
-              <div v-else>
-                <v-text-field v-model="editing" @keyup.enter="changeSectionFlg(parent_index,'end')" :value="section.title" ></v-text-field>
-              </div>
-              </v-card>
+            class="pa-3 ma-2"
+            elevation="2"
+          >
+            <v-list-item three-line>
+              <v-list-item-content>
+                <v-card
+                outlined
+                class="mb-2"
+                elevation="1"
+                >
+                  <div v-if="section.editFlg" @dblclick="changeSectionFlg(parent_index,'start')">
+                    {{ section.title }}              
+                  </div>
+                  <div v-else>
+                    <v-text-field v-model="editing" @keyup.enter="changeSectionFlg(parent_index,'end')" :value="section.title" ></v-text-field>
+                  </div>
+                  </v-card>
 
-              <TaskComponents :section='section' :parent_index="parent_index" />
-          </v-list-item-content>
+                  <TaskComponents :section='section' :parent_index="parent_index" />
+              </v-list-item-content>
 
-        </v-list-item>
-        <TaskNewComponents :parent_index="parent_index" @AddTodo="AddTodo"/>
-      </v-card>
-    </div>
-    </v-row>
+            </v-list-item>
+            <TaskNewComponents :parent_index="parent_index" @AddTodo="AddTodo"/>
+          </v-card>
+        </div>
+      </draggable>
+    </v-container>
   </div>
 </template>
 
@@ -56,10 +58,11 @@
 
 import TaskComponents from './TaskComponents';
 import TaskNewComponents from './TaskNewComponents';
+import draggable from 'vuedraggable'
   export default {
     name: 'SectionComponents',
     components: {
-      TaskComponents,TaskNewComponents
+      TaskComponents,TaskNewComponents,draggable
     },
     data() {
       return{
