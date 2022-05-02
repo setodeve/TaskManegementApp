@@ -1,6 +1,6 @@
 <template>
   <div>
-      <a @click="NewTask()" class="btn btn-primary mt-2">＋</a>
+      <a @click="NewTask()" class="btn btn-primary mt-2"><font-awesome-icon :icon="['fa', 'plus']" /></a>
   </div>
 </template>
 

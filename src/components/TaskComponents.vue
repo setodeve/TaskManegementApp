@@ -28,7 +28,10 @@
     <div v-else>
       <v-text-field v-model="editing" @keyup.enter="changeTaskContentsFlg(section,index,'end')" :value="task.contents" ></v-text-field>
     </div>
-      <a @click="deleteTodo(section,index)" class="btn btn-primary mt-2">×<font-awesome-icon :icon="['fas', 'play']" /></a>
+    <div class="text-right">
+      <a @click="changeTaskContentsFlg(section,index,'start')" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'pen']" /></a>
+      <a @click="deleteTodo(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'trash']" /></a>
+    </div>
   </v-card>
 
   </div>
