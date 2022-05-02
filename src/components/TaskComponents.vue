@@ -28,9 +28,10 @@
     <div v-else>
       <v-text-field v-model="editing" @keyup.enter="changeTaskContentsFlg(section,index,'end')" :value="task.contents" ></v-text-field>
     </div>
-    <div class="d-flex align-start">
-      <a @click="changeTaskContentsFlg(section,index,'start')" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'pen']" :style="{ color: 'grey' }" /></a>
-
+    <div class="d-flex justify-end mb-2">
+      <div>
+        <a @click="changeTaskContentsFlg(section,index,'start')" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'pen']" :style="{ color: 'grey' }" /></a>
+      </div>
       <div v-if="task.complete">
         <a @click="checkcomplete(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'check']" :style="{ color: 'green' }" /></a>
       </div>
@@ -44,8 +45,9 @@
       <div v-else>
         <a @click="checkstatus(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'star']" :style="{ color: 'grey' }"/></a>
       </div>
-      <a @click="deleteTodo(section,index)" class="btn btn-primary pa-1"><font-awesome-icon :icon="['fa', 'trash']" :style="{ color: 'grey' }" /></a>
-
+      <div>
+        <a @click="deleteTodo(section,index)" class="btn btn-primary pa-1 mr-2"><font-awesome-icon :icon="['fa', 'trash']" :style="{ color: 'grey' }" /></a>
+      </div>
     </div>
   </v-card>
 
