@@ -1,24 +1,6 @@
-# taskmanagementapp
+## 概要  
+学習プラットフォームRecursionでタスク管理アプリです。
+vuedraggableを使用してタスクがドラッグ可能になっています。
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## GithubPage
+https://setodeve.github.io/TaskManegementApp/
